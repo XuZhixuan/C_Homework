@@ -41,7 +41,9 @@ int main()
 			printf("It is a tie");
 			h = 0;
 			t = 0;
-			break;
+			printf("ON YOUR MARK，GET SET\n");
+			printf("BANG！！！！\n");
+			printf("AND THEY ARE OFF！！！\n");
 		}
 
 		h_a = action_seeder();

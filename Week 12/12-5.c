@@ -5,6 +5,8 @@ int main()
 {
 	int a, b;
 
+	scanf_s("%d%d", &a, &b);
+
 	if (a < b)
 	{
 		a ^= b;
@@ -13,7 +15,7 @@ int main()
 	}
 
 	int k = a - b;
-
+	
 	a = (int)(k*(1 + sqrt(5)) / 2.0);
 
 	if (a == b)

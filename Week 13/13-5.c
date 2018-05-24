@@ -1,80 +1,74 @@
 #include <stdio.h>
+#include <malloc.h>
 #include <string.h>
 
 char input[1000];
 
-struct Character
+struct Word
 {
-	char letter;
-	int count;
+	char* token;
+	int length;
 };
 
-struct Character count[26];
+struct Word count[100];
 
-void rank();
-void search();
-void initialize();
-void print_struct();
+int split();
+void rank(int length);
 
 int main()
 {
 	gets_s(input, 1000);
+	
+	int length = split();
 
-	initialize();
-	search();
-	rank();
+	rank(length);
 
-	print_struct();
-
+	printf("%s", count[0].token);
 	return 0;
 }
 
-void initialize()
+int split()
 {
-	for (int i = 0; i < 26; i++)
-	{
-		count[i].letter = i + 65;
-	}
-}
+	int i = 1;
 
-void search()
-{
-	for (int i = 0; i < strlen(input); i++)
+	char *token;
+	const char *delim = " ";
+	char *next_token;
+
+	token = strtok_s(input, delim, &next_token);
+	count[0].token = malloc(strlen(token));
+	count[0].token = token;
+
+	while (token != NULL)
 	{
-		if (input[i] >= 97 && input[i] <= 122)
+		token = strtok_s(NULL, delim, &next_token);
+		if (token == NULL)
 		{
-			count[input[i] - 97].count++;
-		} 
-		else if (input[i] >= 65 && input[i] <= 90)
-		{
-			count[input[i] - 65].count++;
+			break;
 		}
+		count[i].token = malloc(strlen(token));
+		count[i].token = token;
+		count[i].length = strlen(token);
+		i++;
 	}
+
+	return i;
 }
 
-void rank()
+void rank(int length)
 {
-	struct Character temp;
+	struct Word temp;
 
-	for (int i = 0; i < 26; i++)
+	for (int i = 0; i < length; i++)
 	{
-		for (int j = 25; j > i; j--)
+		for (int j = length - 1; j > i; j--)
 		{
-			if (count[j - 1].count < count[j].count)
+			if (count[j - 1].length < count[j].length)
 			{
 				temp = count[j - 1];
 				count[j - 1] = count[j];
-				count[j] = temp;
+				count[j] =temp;
 			}
 		}
-	}
-}
-
-void print_struct()
-{
-
-	for (int i = 0; i < 26; i++)
-	{
-		printf(i == 25 ? "%c-%d" : "%c-%d ", count[i].letter, count[i].count);
 	}
 }

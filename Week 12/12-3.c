@@ -4,7 +4,7 @@
 #include <time.h>
 #include <Windows.h>
 
-char track[70];
+char track[73];
 int h = 0, t = 0;
 
 void action_excutor(int h_action, int t_action);
@@ -14,7 +14,7 @@ int referee();
 
 int main()
 {
-	memset(track, 32, 70);
+	memset(track, 32, 73);
 	track[69] = '|';
 	
 	printf("ON YOUR MARK，GET SET\n");
@@ -70,7 +70,7 @@ void print_track()
 		track[t] = 'T';
 	}	
 
-	for (int i = 0; i < 70; i++)
+	for (int i = 0; i < 72; i++)
 	{
 		printf("%c", track[i]);
 	}

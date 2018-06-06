@@ -38,6 +38,7 @@ int split()
 	token = strtok_s(input, delim, &next_token);
 	count[0].token = malloc(strlen(token));
 	count[0].token = token;
+	count[0].length = strlen(token);
 
 	while (token != NULL)
 	{

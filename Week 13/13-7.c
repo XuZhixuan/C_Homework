@@ -4,13 +4,13 @@
 
 char input[1000];
 
-struct Word
+typedef struct Word
 {
 	char* token;
 	int length;
-};
+} word;
 
-struct Word count[100];
+word count[100];
 
 int split();
 void rank(int length);
@@ -18,7 +18,7 @@ void rank(int length);
 int main()
 {
 	gets_s(input, 1000);
-	
+
 	int length = split();
 
 	rank(length);
@@ -31,9 +31,9 @@ int split()
 {
 	int i = 1;
 
-	char *token;
-	const char *delim = " ";
-	char *next_token;
+	char* token;
+	const char* delim = " ";
+	char* next_token;
 
 	token = strtok_s(input, delim, &next_token);
 	count[0].token = malloc(strlen(token));
@@ -58,7 +58,7 @@ int split()
 
 void rank(int length)
 {
-	struct Word temp;
+	word temp;
 
 	for (int i = 0; i < length; i++)
 	{
@@ -68,7 +68,7 @@ void rank(int length)
 			{
 				temp = count[j - 1];
 				count[j - 1] = count[j];
-				count[j] =temp;
+				count[j] = temp;
 			}
 		}
 	}

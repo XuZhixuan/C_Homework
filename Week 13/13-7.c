@@ -36,7 +36,7 @@ int split()
 	char* next_token;
 
 	token = strtok_s(input, delim, &next_token);
-	count[0].token = malloc(strlen(token));
+	count[0].token = malloc(sizeof(token));
 	count[0].token = token;
 	count[0].length = strlen(token);
 
@@ -47,7 +47,7 @@ int split()
 		{
 			break;
 		}
-		count[i].token = malloc(strlen(token));
+		count[i].token = malloc(sizeof(token));
 		count[i].token = token;
 		count[i].length = strlen(token);
 		i++;

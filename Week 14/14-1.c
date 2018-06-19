@@ -80,6 +80,8 @@ int main()
 	DeleteFromListByName(contacts, "My");
 	printList(contacts);
 
+	DestroyList(contacts);
+
 	return 0;
 }
 

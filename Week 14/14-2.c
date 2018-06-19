@@ -38,6 +38,8 @@ int main()
 	{
 		printf("%d\n", queue->queArray[i]);
 	}
+
+	DestroyQueue(queue);
 	
 	return 0;
 }
@@ -70,8 +72,8 @@ void DestroyQueue(Queue * queue)
 
 void ClearQueue(Queue * queue)
 {
-	queue->front = 0;
-	queue->rear = 0;
+	queue->front = -1;
+	queue->rear = -1;
 	return;
 }
 

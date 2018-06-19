@@ -5,7 +5,7 @@
 typedef struct _contact
 {
 	char name[10];
-	char phone[11];
+	char phone[12];
 } DataType;
 
 typedef struct _contactList
@@ -29,6 +29,59 @@ int DeleteFromList(ListType* pList, int position);
 int DeleteFromListByName(ListType* pList, char* name);
 void printList(ListType* pList);
 void printLine(char* to_print, int size_to_print);
+
+int main()
+{
+	ListType* contacts = CreateList(7);
+
+	printList(contacts);
+	printf("现在插入数据\n");
+
+	DataType to_insert = {"David","13466983721"};
+	InsertToList(contacts, 0, to_insert);
+
+	memset(to_insert.name, '\0', 10);
+	strcpy_s(to_insert.name, 10, "Alice");
+	strcpy_s(to_insert.phone, 12, "18391133875");
+	InsertToList(contacts, 1, to_insert);
+
+	memset(to_insert.name, '\0', 10);
+	strcpy_s(to_insert.name, 10, "Mary");
+	strcpy_s(to_insert.phone, 12, "18391133875");
+	InsertToList(contacts, 2, to_insert);
+
+	memset(to_insert.name, '\0', 10);
+	strcpy_s(to_insert.name, 10, "Maria");
+	strcpy_s(to_insert.phone, 12, "15968753951");
+	InsertToList(contacts, 3, to_insert);
+
+	memset(to_insert.name, '\0', 10);
+	strcpy_s(to_insert.name, 10, "My");
+	strcpy_s(to_insert.phone, 12, "11206997586");
+	InsertToList(contacts, 4, to_insert);
+
+	memset(to_insert.name, '\0', 10);
+	strcpy_s(to_insert.name, 10, "Jhon");
+	strcpy_s(to_insert.phone, 12, "11516874548");
+	InsertToList(contacts, 5, to_insert);
+
+	memset(to_insert.name, '\0', 10);
+	strcpy_s(to_insert.name, 10, "Jhoson");
+	strcpy_s(to_insert.phone, 12, "12345678900");
+	InsertToList(contacts, 6, to_insert);
+
+	printList(contacts);
+
+	printf("现在删除第二个\n");
+	DeleteFromList(contacts, 1);
+	printList(contacts);
+
+	printf("现在删除名叫My的\n");
+	DeleteFromListByName(contacts, "My");
+	printList(contacts);
+
+	return 0;
+}
 
 ListType* CreateList(int length)
 {
@@ -151,7 +204,7 @@ int DeleteFromListByName(ListType* pList, char* name)
 
 	for (int i = 1; i <= pList->length; i++)
 	{
-		if (strcmp(pList->list[i].name,name) == 0)
+		if (strcmp(pList->list[i].name, name) == 0)
 		{
 			position = i;
 		}
@@ -188,13 +241,13 @@ void printList(ListType* pList)
 		memset(to_print, ' ', 25);
 		to_print[0] = '|'; to_print[11] = '|'; to_print[24] = '|';
 		memcpy_s(&to_print[1], 10, pList->list[i].name, strlen(pList->list[i].name));
-		memcpy_s(&to_print[12], 11, pList->list[i].phone, strlen(pList->list[i].phone));		
+		memcpy_s(&to_print[12], 11, pList->list[i].phone, strlen(pList->list[i].phone));
+		printLine(to_print, 25);
+
+		memset(to_print, '-', 25);
+		to_print[0] = '+'; to_print[11] = '+'; to_print[24] = '+';
 		printLine(to_print, 25);
 	}
-
-	memset(to_print, '-', 25);
-	to_print[0] = '+'; to_print[11] = '+'; to_print[24] = '+';
-	printLine(to_print, 25);
 
 	return;
 }
